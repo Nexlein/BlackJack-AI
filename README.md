@@ -96,10 +96,12 @@ uv run python -m tui.main
 ```
 
 <div align="center">
-  <br/>
-  <b>Demo TUI :</b><br/>
-  https://github.com/Nexlein/BlackJack-AI/raw/master/docs/tui_demo.mp4
-  <br/>
+  <b>Demo TUI :</b>
+</div>
+
+<https://github.com/Nexlein/BlackJack-AI/raw/master/docs/tui_demo.mp4>
+
+<div align="center">
   <ul style="text-align:left; margin:0; padding-left:20px; display:inline-block;">
     <li>Press <kbd>t</kbd> to start a new Training run.</li>
     <li>Press <kbd>e</kbd> to evaluate the latest model.</li>
