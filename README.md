@@ -99,7 +99,7 @@ uv run python -m tui.main
   <b>Demo TUI :</b>
 </div>
 
-<video src="docs/tui_demo.mp4" controls="controls" muted="muted"></video>
+![TUI Demo](docs/tui_demo.mp4)
 
 <div align="center">
   <ul style="text-align:left; margin:0; padding-left:20px; display:inline-block;">
