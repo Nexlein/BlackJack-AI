@@ -12,10 +12,6 @@ from utils.charts import (
     chart_action_distribution,
 )
 
-# ──────────────────────────────────────────────────────────────────────
-# Evaluate
-# ──────────────────────────────────────────────────────────────────────
-
 
 def evaluate_model(
     timestamp: str,
@@ -49,7 +45,7 @@ def evaluate_model(
     model = MaskablePPO.load(model_path)
     env = BlackjackEnv(config=config)
 
-    # ── Run episodes ──────────────────────────────────────────────────
+    # Run episodes
     episode_records = []
     action_counts = {0: 0, 1: 0, 2: 0, 3: 0}  # Hit / Stand / Double / Split
 
@@ -86,7 +82,7 @@ def evaluate_model(
             done_pct = (i + 1) / episodes * 100
             print(f"  Progress: {done_pct:.0f}%  ({i + 1:,}/{episodes:,})")
 
-    # ── Aggregate metrics ──────────────────────────────────────────────
+    # Aggregate metrics
     df = pd.DataFrame(episode_records)
 
     wins = (df["result"] == "win").sum()
@@ -98,12 +94,12 @@ def evaluate_model(
     tie_rate = ties / episodes
     edge = df["reward"].mean()
 
-    # ── Save per-episode log ───────────────────────────────────────────
+    # Save per-episode log
     per_ep_path = os.path.join(eval_dir, "per_episode.csv")
     df.to_csv(per_ep_path, index=False)
     print(f"\n  Per-episode log → {per_ep_path}")
 
-    # ── Save summary ───────────────────────────────────────────────────
+    # Save summary
     summary = pd.DataFrame(
         [
             {
@@ -138,7 +134,7 @@ def evaluate_model(
     )
     print(f"{'━' * 50}\n")
 
-    # ── Charts ─────────────────────────────────────────────────────────
+    # Charts
     print("  Generating charts…")
 
     chart_cumulative_reward(df, os.path.join(charts_dir, "cumulative_reward.png"))
@@ -163,10 +159,6 @@ def evaluate_model(
     print(f"\n  All charts → {charts_dir}")
     print("  Done.\n")
 
-
-# ──────────────────────────────────────────────────────────────────────
-# Entry point
-# ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

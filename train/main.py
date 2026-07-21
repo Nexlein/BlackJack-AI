@@ -14,11 +14,6 @@ from utils.charts import generate_training_charts
 from utils.report import generate_run_readme
 
 
-# ──────────────────────────────────────────────────────────────────────
-# Callback
-# ──────────────────────────────────────────────────────────────────────
-
-
 class MetricsCallback(BaseCallback):
     """
     Tracks win/loss/tie rates using a rolling window.
@@ -46,11 +41,6 @@ class MetricsCallback(BaseCallback):
             self.logger.record("custom/tie_rate", ties / total)
 
         return True
-
-
-# ──────────────────────────────────────────────────────────────────────
-# Train
-# ──────────────────────────────────────────────────────────────────────
 
 
 def train_agent(config: dict, run_name: str | None = None):
@@ -123,29 +113,24 @@ def train_agent(config: dict, run_name: str | None = None):
 
     model.learn(total_timesteps=timesteps, callback=callbacks)
 
-    # ── Save models ────────────────────────────────────────────────────
+    # Save models
     last_model_path = os.path.join(models_dir, "last_model")
     model.save(last_model_path)
     print(f"\n  Final model → {last_model_path}.zip")
 
-    # ── Removed cleaning of progress.csv to keep full tensorboard-like metrics ──
     csv_path = os.path.join(train_dir, "progress.csv")
 
-    # ── Generate charts ────────────────────────────────────────────────
+    # Generate charts
     os.makedirs(charts_dir, exist_ok=True)
     metrics = generate_training_charts(csv_path, charts_dir)
 
-    # ── README ─────────────────────────────────────────────────────────
+    # README
     generate_run_readme(base_dir, timestamp, timesteps, metrics, train_cfg)
 
     print(f"\n{'━' * 50}")
     print(f"  Done. Artifact: artifacts/{timestamp}")
     print(f"{'━' * 50}\n")
 
-
-# ──────────────────────────────────────────────────────────────────────
-# Entry point
-# ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train the Blackjack AI agent.")

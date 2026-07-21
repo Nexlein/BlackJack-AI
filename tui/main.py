@@ -29,8 +29,6 @@ import subprocess
 import threading
 from typing import Optional
 
-# Ensure the project root is in sys.path so 'train', 'eval', 'utils' can be imported
-# even if the script is run directly as `python tui/main.py` instead of `-m tui.main`
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from textual.app import App, ComposeResult
@@ -48,10 +46,6 @@ from tui.format import (
     _DEFAULT_SPEED_IDX,
 )
 
-# ──────────────────────────────────────────────────────────────────────
-# TUI App
-# ──────────────────────────────────────────────────────────────────────
-
 
 class BlackjackTUI(App):
     """Keyboard-driven Textual App to manage the Blackjack AI project."""
@@ -68,10 +62,6 @@ class BlackjackTUI(App):
     ]
 
     CSS_PATH = "styles.tcss"
-
-    # ------------------------------------------------------------------
-    # Compose
-    # ------------------------------------------------------------------
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -130,10 +120,6 @@ class BlackjackTUI(App):
 
         yield Footer()
 
-    # ------------------------------------------------------------------
-    # Mount
-    # ------------------------------------------------------------------
-
     def on_mount(self) -> None:
         self.title = "Blackjack AI Control Panel"
         self.procs: list[subprocess.Popen] = []
@@ -161,10 +147,6 @@ class BlackjackTUI(App):
             "[dim]Press [bold]w[/bold] to watch the AI play.[/dim]"
         )
 
-    # ------------------------------------------------------------------
-    # Utilities
-    # ------------------------------------------------------------------
-
     def _latest_artifact(self) -> Optional[str]:
         if not os.path.exists(self.artifacts_dir):
             return None
@@ -188,10 +170,6 @@ class BlackjackTUI(App):
     @property
     def _watch_speed(self) -> float:
         return _SPEEDS[self._speed_idx]
-
-    # ------------------------------------------------------------------
-    # Metrics bar polling (during training)
-    # ------------------------------------------------------------------
 
     def poll_training_metrics(self) -> None:
         import csv
@@ -256,10 +234,6 @@ class BlackjackTUI(App):
         except Exception:
             pass
 
-    # ------------------------------------------------------------------
-    # Watch display helpers (thread-safe via call_from_thread)
-    # ------------------------------------------------------------------
-
     def _watch_write(self, msg: str) -> None:
         self.query_one("#watch_log", RichLog).write(msg)
 
@@ -277,10 +251,6 @@ class BlackjackTUI(App):
             f"Ties: [yellow]{self._ties}[/yellow]"
         )
         self.query_one("#score_wrate", Label).update(f"W-Rate: [cyan]{wrate}[/cyan]")
-
-    # ------------------------------------------------------------------
-    # Watch worker
-    # ------------------------------------------------------------------
 
     @work(thread=True)
     def run_watch_loop(self) -> None:
@@ -444,10 +414,6 @@ class BlackjackTUI(App):
         self.call_from_thread(self._watch_write, "[dim]Watch stopped.[/dim]")
         self._watching = False
 
-    # ------------------------------------------------------------------
-    # Tail subprocess output
-    # ------------------------------------------------------------------
-
     @work(thread=True)
     def tail_output(self, stream, log_widget: RichLog, log_file: str | None = None):
         f = None
@@ -465,10 +431,6 @@ class BlackjackTUI(App):
                     pass
         if f:
             f.close()
-
-    # ------------------------------------------------------------------
-    # Actions
-    # ------------------------------------------------------------------
 
     def action_train_ai(self) -> None:
         self.notify("Starting AI Training…", title="Train")
@@ -601,10 +563,6 @@ class BlackjackTUI(App):
     def on_unmount(self) -> None:
         self.action_stop_all()
 
-
-# ──────────────────────────────────────────────────────────────────────
-# Entry point
-# ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     app = BlackjackTUI()

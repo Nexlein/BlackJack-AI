@@ -48,10 +48,6 @@ class BlackjackEnv(gym.Env):
         self._hand_idx = 0
         self._blackjack_pending = False  # Natural BJ — resolve on next step()
 
-    # ------------------------------------------------------------------
-    # Core step
-    # ------------------------------------------------------------------
-
     def step(self, action: int):
         """
         Executes the given action in the environment.
@@ -126,10 +122,6 @@ class BlackjackEnv(gym.Env):
 
         return self._get_obs(), reward, terminated, False, info
 
-    # ------------------------------------------------------------------
-    # Observation
-    # ------------------------------------------------------------------
-
     def _get_obs(self) -> np.ndarray:
         """
         Constructs the observation vector for the current state.
@@ -160,10 +152,6 @@ class BlackjackEnv(gym.Env):
             num_cards,
             can_double,
         )
-
-    # ------------------------------------------------------------------
-    # Reset
-    # ------------------------------------------------------------------
 
     def reset(self, *, seed: int | None = None, options: dict | None = None):
         """

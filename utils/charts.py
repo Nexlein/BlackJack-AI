@@ -35,7 +35,7 @@ def generate_training_charts(csv_path: str, output_dir: str) -> dict:
 
         steps_col = "time/total_timesteps"
 
-        # ── Reward chart ───────────────────────────────────────────────
+        # Reward chart
         if "rollout/ep_rew_mean" in df.columns:
             raw: pd.Series = df[steps_col]  # type: ignore[assignment]
             rew: pd.Series = df["rollout/ep_rew_mean"]  # type: ignore[assignment]
@@ -70,7 +70,7 @@ def generate_training_charts(csv_path: str, output_dir: str) -> dict:
 
             metrics["reward_mean"] = f"{smoothed.iloc[-1]:.4f}"
 
-        # ── Win/Loss/Tie rate chart ────────────────────────────────────
+        # Win/Loss/Tie rate chart
         rate_cols = {
             "custom/win_rate": ("Win Rate", _PALETTE["win"]),
             "custom/loss_rate": ("Loss Rate", _PALETTE["loss"]),
