@@ -32,3 +32,6 @@ jobs:
 
       - name: Type checking (Pyright / Pylance)
         run: uv run pyright
+
+      - name: Run Tests (Pytest)
+        run: uv run pytest
