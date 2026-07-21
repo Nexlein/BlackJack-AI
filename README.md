@@ -95,9 +95,12 @@ The easiest way to manage the AI is through the gorgeous terminal interface.
 uv run python -m tui.main
 ```
 
-<div align="center" style="display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap;">
-  <video src="docs/tui_demo.mp4" width="800" autoplay loop muted controls style="max-width:100%;"></video>
-  <ul style="text-align:left; margin:0; padding-left:20px;">
+<div align="center">
+  <br/>
+  <b>Demo TUI :</b><br/>
+  https://github.com/Nexlein/BlackJack-AI/raw/master/docs/tui_demo.mp4
+  <br/>
+  <ul style="text-align:left; margin:0; padding-left:20px; display:inline-block;">
     <li>Press <kbd>t</kbd> to start a new Training run.</li>
     <li>Press <kbd>e</kbd> to evaluate the latest model.</li>
     <li>Press <kbd>q</kbd> to quit.</li>
