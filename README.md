@@ -140,13 +140,18 @@ uv run python -m eval.main 2026-07-21_18-00-00 --set env.num_decks=1
 Interested in making the AI smarter? Here is how to extend the project:
 
 1. **Card Counting:**
+
    Currently, the AI doesn't count cards. To implement this, modify `train/features.py` to add a new observation feature (e.g., the *True Count*), and update the `observation_space` in `train/env.py` to account for this new dimension.
+
 2. **Surrender Rule:**
+
    Want to add the "Late Surrender" casino rule?
    - Add a `surrender()` method to `engine/game.py`.
    - Expand the action space from `Discrete(4)` to `Discrete(5)` in `train/env.py`.
    - Update `utils/charts.py` to map the new action color.
+
 3. **Hyperparameter Tuning:**
+
    All settings are located in `config.json`. Play with `ent_coef` (Entropy) to encourage the AI to explore rare actions like Splitting before it converges!
 
 ---
