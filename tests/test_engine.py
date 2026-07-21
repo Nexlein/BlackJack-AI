@@ -49,8 +49,9 @@ def test_game_settle():
     game = BlackjackGame(p1)
     game.start_round(10)
 
-    # Force hands
+    # Force hands and reset status in case start_round dealt a natural blackjack
     p1.hands[0].cards = [Card(Rank.TEN, Suit.HEARTS), Card(Rank.TEN, Suit.CLUBS)]  # 20
+    p1.hands[0].status = HandStatus.STAND
     game.dealer_hand.cards = [
         Card(Rank.TEN, Suit.SPADES),
         Card(Rank.NINE, Suit.DIAMONDS),
