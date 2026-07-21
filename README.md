@@ -99,7 +99,7 @@ uv run python -m tui.main
   <b>Demo TUI :</b>
 </div>
 
-<https://github.com/Nexlein/BlackJack-AI/raw/master/docs/tui_demo.mp4>
+<video src="docs/tui_demo.mp4" controls="controls" muted="muted"></video>
 
 <div align="center">
   <ul style="text-align:left; margin:0; padding-left:20px; display:inline-block;">
