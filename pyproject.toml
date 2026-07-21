@@ -1,0 +1,35 @@
+[project]
+name = "blackjack-ai"
+version = "0.1.0"
+description = "Blackjack AI with Reinforcement Learning"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium",
+    "matplotlib>=3.11.0",
+    "pandas>=3.0.3",
+    "pyright>=1.1.411",
+    "pytest",
+    "sb3-contrib>=2.9.0",
+    "stable-baselines3",
+    "tensorboard>=2.20.0",
+    "textual>=8.2.7",
+    "torch",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+    "ruff>=0.15.21",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

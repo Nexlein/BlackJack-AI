@@ -1,0 +1,78 @@
+/* ── Global ─────────────────────────────────────── */
+Screen {
+    layout: vertical;
+}
+
+/* ── Metrics bar ─────────────────────────────────── */
+#metrics_bar {
+    height: 3;
+    align: center middle;
+    background: $panel;
+    border-bottom: solid $primary;
+}
+.metric {
+    padding: 0 3;
+    text-style: bold;
+}
+
+/* ── Main 3-panel area ───────────────────────────── */
+#main_area {
+    height: 1fr;
+}
+
+/* Left column: 40% wide, contains train + eval stacked */
+#left_col {
+    width: 40%;
+    height: 100%;
+    border-right: solid $primary;
+}
+
+/* Each left panel takes half the height */
+#train_section {
+    height: 50%;
+    border-bottom: solid $primary;
+}
+#eval_section {
+    height: 50%;
+}
+
+/* Right column: watch, 60% wide */
+#right_col {
+    width: 60%;
+    height: 100%;
+}
+
+/* ── Panel headers ───────────────────────────────── */
+.panel_header {
+    height: 1;
+    background: $boost;
+    color: $primary;
+    text-style: bold;
+    padding: 0 1;
+    width: 100%;
+}
+
+/* ── Log widgets ─────────────────────────────────── */
+RichLog {
+    height: 1fr;
+    background: $surface;
+    scrollbar-gutter: stable;
+}
+
+/* ── Watch scoreboard + controls ─────────────────── */
+#watch_scoreboard {
+    height: 3;
+    align: center middle;
+    background: $panel;
+    border-top: solid $primary;
+    text-style: bold;
+}
+.score_item {
+    padding: 0 3;
+}
+#watch_controls {
+    height: 2;
+    align: center middle;
+    background: $surface;
+    border-top: solid $primary;
+}
