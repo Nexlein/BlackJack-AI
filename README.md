@@ -99,7 +99,7 @@ uv run python -m tui.main
   <b>Demo TUI :</b>
 </div>
 
-![TUI Demo](docs/tui_demo.mp4)
+https://github.com/user-attachments/assets/f8b3cff2-e055-46bf-94cf-97f81f60116b
 
 <div align="center">
   <ul style="text-align:left; margin:0; padding-left:20px; display:inline-block;">
