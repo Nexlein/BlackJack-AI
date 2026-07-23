@@ -1,4 +1,4 @@
-from .card import Deck
+from .card import Deck, Rank
 from .player import Player
 from .hand import Hand, HandStatus
 
@@ -67,10 +67,19 @@ class BlackjackGame:
         Splits a hand into two separate hands.
         Returns True if successful, False if illegal.
         """
+        if len(self.player.hands) >= 4:
+            return False
+
         try:
+            is_ace_split = self.player.hands[hand_index].cards[0].rank == Rank.ACE
             self.player.split_hand(hand_index)
             self.player.hands[hand_index].add_card(self.deck.draw())
             self.player.hands[-1].add_card(self.deck.draw())
+
+            if is_ace_split:
+                self.player.hands[hand_index].status = HandStatus.STAND
+                self.player.hands[-1].status = HandStatus.STAND
+
             return True
         except ValueError:
             return False
@@ -107,6 +116,8 @@ class BlackjackGame:
 
             if dealer_val > 21 or hand.value > dealer_val:
                 self.player.win_bet(hand, 2.0)
+            elif dealer_blackjack:
+                pass  # Le joueur perd (sa mise est déjà déduite)
             elif hand.value == dealer_val:
                 self.player.push_bet(hand)
             # Else lose, bet is already deducted

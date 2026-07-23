@@ -28,6 +28,8 @@ class Hand:
             self.status = HandStatus.BUSTED
         elif self.value == 21 and len(self.cards) == 2 and not self.is_split:
             self.status = HandStatus.BLACKJACK
+        elif self.value == 21:
+            self.status = HandStatus.STAND
 
     def _eval(self) -> tuple[int, bool]:
         total = sum(c.value for c in self.cards)

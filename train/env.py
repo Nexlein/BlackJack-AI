@@ -184,7 +184,15 @@ class BlackjackEnv(gym.Env):
         hand = self.player.hands[self._hand_idx]
         can_hit = hand.value < 21
         can_stand = True
-        can_double = len(hand.cards) == 2 and self.player.bankroll >= hand.bet
-        can_split = hand.can_split() and self.player.bankroll >= hand.bet
+        can_double = (
+            len(hand.cards) == 2
+            and hand.value < 21
+            and self.player.bankroll >= hand.bet
+        )
+        can_split = (
+            hand.can_split()
+            and self.player.bankroll >= hand.bet
+            and len(self.player.hands) < 4
+        )
 
         return [can_hit, can_stand, can_double, can_split]
