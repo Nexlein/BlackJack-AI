@@ -85,9 +85,10 @@ def evaluate_model(
     # Aggregate metrics
     df = pd.DataFrame(episode_records)
 
-    wins = (df["result"] == "win").sum()
-    losses = (df["result"] == "loss").sum()
-    ties = (df["result"] == "tie").sum()
+    results = df["result"].to_numpy()
+    wins = int((results == "win").sum())
+    losses = int((results == "loss").sum())
+    ties = int((results == "tie").sum())
 
     win_rate = wins / episodes
     loss_rate = losses / episodes

@@ -36,3 +36,7 @@ pythonpath = ["."]
 [tool.basedpyright]
 # Same level as the editor (VSCodium basedpyright setting)
 typeCheckingMode = "standard"
+
+[tool.ruff.lint]
+# Ruff 0.17 widened its default rules; keep the set this code was written against
+select = ["E4", "E7", "E9", "F"]
