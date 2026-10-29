@@ -1,0 +1,39 @@
+{
+  // F5 runs a module under debugpy with the uv virtualenv.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Train",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "train.main",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Evaluate a run",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "eval.main",
+      "args": ["${input:timestamp}", "--episodes", "10"],
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "console": "integratedTerminal"
+    },
+    {
+      // Textual needs a real terminal
+      "name": "Dashboard (TUI)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "tui.main",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "timestamp",
+      "type": "promptString",
+      "description": "Artifact folder name in artifacts/, e.g. 2026-07-21_18-00-00"
+    }
+  ]
+}
