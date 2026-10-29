@@ -18,7 +18,7 @@ _ACTION_NAMES = {0: "Hit", 1: "Stand", 2: "Double", 3: "Split"}
 _ACTION_COLORS = ["#FF6B6B", "#4ECDC4", "#FFE66D", "#1A535C"]
 
 
-def _smooth(series: pd.Series, window: int = 10) -> pd.Series:
+def _smooth(series: pd.Series | pd.DataFrame, window: int = 10) -> pd.Series:
     result = series.rolling(window=window, min_periods=1).mean()
     return result  # type: ignore[return-value]
 
@@ -158,13 +158,12 @@ def chart_cumulative_reward(episode_df: pd.DataFrame, output_path: str):
 def chart_rolling_win_rate(
     episode_df: pd.DataFrame, output_path: str, window: int = 500
 ):
-    wins = (episode_df["result"] == "win").astype(float)
-    rolling_mean_s = wins.rolling(window=window, min_periods=1).mean() * 100
-    rolling_std_s = wins.rolling(window=window, min_periods=1).std().fillna(0) * 100
+    wins = pd.Series(episode_df["result"].to_numpy() == "win", dtype=float)
+    rolling = wins.rolling(window=window, min_periods=1)
 
     x = episode_df.index.to_numpy()
-    mean_arr = rolling_mean_s.to_numpy(dtype=float)
-    std_arr = rolling_std_s.to_numpy(dtype=float)
+    mean_arr = np.asarray(rolling.mean(), dtype=float) * 100
+    std_arr = np.nan_to_num(np.asarray(rolling.std(), dtype=float)) * 100
     lower = np.clip(mean_arr - std_arr, 0, None)
     upper = np.clip(mean_arr + std_arr, None, 100)
 
