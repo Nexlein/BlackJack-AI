@@ -93,7 +93,7 @@ cd BlackJack-AI
 
 # uv will automatically create a virtual environment and install dependencies
 uv sync
-uvx pre-commit install   # Ruff on every commit
+uvx pre-commit install   # Ruff, secret scan and commit message checks
 ```
 
 ---

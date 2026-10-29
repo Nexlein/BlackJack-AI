@@ -14,12 +14,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v10.3.3
         with:
           enable-cache: true
-
-      - name: Install Python 3.12
-        run: uv python install 3.12
 
       - name: Install dependencies
         run: uv sync
@@ -30,8 +27,8 @@ jobs:
       - name: Lint (Ruff)
         run: uv run ruff check .
 
-      - name: Type checking (Pyright / Pylance)
-        run: uv run pyright
+      - name: Type checking (basedpyright)
+        run: uv run basedpyright
 
       - name: Run Tests (Pytest)
         run: uv run pytest
