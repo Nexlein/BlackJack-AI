@@ -1,4 +1,6 @@
 # Enable once per clone: uvx pre-commit install
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
 repos:
   - repo: local
     hooks:
@@ -15,3 +17,16 @@ repos:
         language: system
         types: [python]
         require_serial: true
+
+      - id: no-secrets
+        name: Secrets (gitleaks, regex fallback)
+        entry: sh hooks/no-secrets.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: commit-msg
+        name: Conventional Commits
+        entry: sh hooks/commit-msg.sh
+        language: system
+        stages: [commit-msg]

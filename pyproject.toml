@@ -8,7 +8,6 @@ dependencies = [
     "gymnasium",
     "matplotlib>=3.11.0",
     "pandas>=3.0.3",
-    "pyright>=1.1.411",
     "pytest",
     "sb3-contrib>=2.9.0",
     "stable-baselines3",
@@ -27,9 +26,13 @@ explicit = true
 
 [dependency-groups]
 dev = [
-    "pyright>=1.1.411",
+    "basedpyright",
     "ruff>=0.15.21",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.basedpyright]
+# Same level as the editor (VSCodium basedpyright setting)
+typeCheckingMode = "standard"
