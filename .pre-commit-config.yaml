@@ -1,0 +1,17 @@
+# Enable once per clone: uvx pre-commit install
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff linter
+        entry: uv run ruff check --fix
+        language: system
+        types: [python]
+        require_serial: true
+
+      - id: ruff-format
+        name: Ruff formatter
+        entry: uv run ruff format
+        language: system
+        types: [python]
+        require_serial: true
